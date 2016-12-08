@@ -22,7 +22,7 @@ function AoC_8(source){
 		];
 		
 	while(pc < rom.length)
-		op[rom[pc++]](rom[pc++], rom[pc++]), display();
+		op[rom[pc++]](rom[pc++], rom[pc++]);
 	
 	display();
 	
@@ -37,8 +37,10 @@ function AoC_8(source){
 	}
 	
 	function display(){
+		var lcd = [];
 		for(var i = 0; i < 6; i++)
-			console.log(mem.slice(i * 50, (i + 1) * 50 -1).join(''));
+			lcd.push(mem.slice(i * 50, (i + 1) * 50 -1).map(function(c){ return String.fromCharCode(c * 47 + 32); }).join(''));
+		console.log(lcd.join('\n'));
 	}
 }
 
