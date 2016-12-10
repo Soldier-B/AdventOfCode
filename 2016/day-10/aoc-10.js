@@ -3,17 +3,20 @@ function AoC_10(rules){
 	
 	rules.filter(function(rule){
 		rule = rule.split(' ');
-		if(rule[0] == 'bot'){
-			factory.bot[rule[1]] = botFromRule(rule);
-			return false;
-		}
-		return true;
+		return rule[0] == 'bot' ? (factory.bot[rule[1]] = botFromRule(rule), false) : true;
 	}).forEach(function(init){
 		init = init.split(' ');
 		factory.bot[init[5]].add(+init[1]);
 	});
 	
-	console.log(factory.output[0][0] * factory.output[1][0] * factory.output[2][0]);
+	console.log(factory.output.slice(0,3).reduce(function(total,  output){
+		return total * output;
+	}, 1));
+	
+	function setTarget(type, id, value){
+		factory[type][id] = factory[type][id] || [];
+		factory[type][id][factory[type][id].map ? 'push' : 'add'](value);
+	}
 	
 	function botFromRule(rule){
 		var values = [];
@@ -23,18 +26,8 @@ function AoC_10(rules){
 				if(values.length == 2){
 					if(values[0] == 17 && values[1] == 61)
 						console.log(this.id + ' compares 17 & 61');
-					if(this.lowType == 'bot')
-						factory[this.lowType][this.lowId].add(values[0]);
-					else{
-						factory[this.lowType][this.lowId] = factory[this.lowType][this.lowId] || [];
-						factory[this.lowType][this.lowId].push(values[0]);
-					}
-					if(this.highType == 'bot')
-						factory[this.highType][this.highId].add(values[1]);
-					else{
-						factory[this.highType][this.highId] = factory[this.highType][this.highId] || [];
-						factory[this.highType][this.highId].push(values[1]);
-					}
+					setTarget(this.lowType, this.lowId, values[0]);
+					setTarget(this.highType, this.highId, values[1]);
 					values.length = 0;
 				}		
 			},
