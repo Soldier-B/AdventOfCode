@@ -6,22 +6,19 @@ function AoC_10(rules){
 		return rule[0] == 'bot' ? (factory.bot[rule[1]] = botFromRule(rule), false) : true;
 	}).forEach(function(init){
 		init = init.split(' ');
-		factory.bot[init[5]].add(+init[1]);
+		factory.bot[init[5]].push(+init[1]);
 	});
 	
-	console.log(factory.output.slice(0,3).reduce(function(total,  output){
-		return total * output;
-	}, 1));
+	console.log(factory.output[0][0] * factory.output[1][0] * factory.output[2][0]);
 	
 	function setTarget(type, id, value){
-		factory[type][id] = factory[type][id] || [];
-		factory[type][id][factory[type][id].map ? 'push' : 'add'](value);
+		(factory[type][id] = factory[type][id] || []).push(value);
 	}
 	
 	function botFromRule(rule){
 		var values = [];
 		return {
-			add: function(value){
+			push: function(value){
 				values[!values.length || values[0] < value ? 'push' : 'unshift'](value);
 				if(values.length == 2){
 					if(values[0] == 17 && values[1] == 61)
