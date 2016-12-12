@@ -14,8 +14,7 @@ part 2 adds extra items on 1st floor...still works though
 */
 function AoC_11(){
 	var moves = 0;
-	return [].slice(arguments).reduce(function(total, items){
-		return (items && (moves += 2 * (total + items - 1) - 1)), total + items;
+		return (items && (moves += 2 * (total + items) - 3)), total + items;
 	}, 0), moves;
 }
 
