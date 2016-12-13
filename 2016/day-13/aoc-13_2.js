@@ -20,7 +20,7 @@ function AoC_13_2(){
 	
 	function prune(n){
 		if(visited.has(n.key) || n.x < 0 || n.y < 0) return false;
-		return ((n.x * n.x) + (3 * n.x) + (2 * n.x * n.y) + n.y + (n.y * n.y) + 1352)
+		return (n.x * (n.x + 3) + (2 * n.x * n.y) + n.y * (n.y + 1) + 1352)
 			.toString(2)
 			.match(/1/g)
 			.length % 2 == 0;
