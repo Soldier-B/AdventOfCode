@@ -2,13 +2,12 @@ function aoc_2_1(spreadsheet){
 	return spreadsheet.reduce(function(checksum, row){
 		for(var i = 0; i < row.length - 1; i++){
 			for(var j = i + 1; j < row.length; j++){
-				if((row[i] % row[j]) == 0)
-					return checksum + row[i] / row[j];
-				if((row[j] % row[i]) == 0)
-					return checksum + row[j] / row[i];
+				var m = Math.min(row[i], row[j]),
+					n = row[i] + row[j] - m;
+				if((n % m) == 0)
+					return checksum + n / m;
 			}
 		}
-		return checksum;
 	}, 0);
 }
 
