@@ -1,29 +1,31 @@
 function aoc_11(pw){
-	pw = pw.split('').map(function(c){ return c.charCodeAt(0) - 97; });
+	pw = base26(pw);
 	
-	do { inc(); } while (!isValid())
+	do { next(); } while (!valid())
 		
-	return pw.map(function(c){ return String.fromCharCode(c + 97); }).join('');
+	return base26(pw);
 	
-	function inc(){
+	function base26(a){
+		if(a instanceof Array)
+			return a.map(function(b){ return String.fromCharCode(b + 97); }).join('');
+		return a.split('').map(function(b){ return b.charCodeAt(0) - 97; });
+	}
+
+	function next(){
 		var i = pw.length - 1, j, l;
 			
 		do {
 			j = pw[i] + 1;
-			l = 0;
-
 			if(j == 8 || j == 11 || j == 14) j++;
-			
 			l = Math.floor(j / 26);
-			j %= 26;
-			pw[i--] = j;
-		} while(l > 0)
+			pw[i--] = j % 26;
+		} while(l)
 	}
 	
-	function isValid(){
+	function valid(){
 		return pw.some(function(c, i, a){
 				return (i < a.length - 2) && c == a[i + 1] - 1 && c == a[i + 2] - 2;
-			}) && /(.)\1.*(.)\2/.test(pw.map(function(c){ return String.fromCharCode(c + 97); }).join(''))
+			}) && /(.)\1.*(.)\2/.test(base26(pw));
 	}
 }
 
