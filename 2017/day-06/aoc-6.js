@@ -5,7 +5,7 @@ function aoc_6(banks) {
     while(history.indexOf(key = banks.join(',')) < 0){        
         history.push(key);
 
-        index = banks.indexOf(max = Math.max.apply(0, banks));        
+        index = banks.indexOf(max = Math.max(...banks));        
 
         banks[index] = 0;
         
