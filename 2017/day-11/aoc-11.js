@@ -19,7 +19,7 @@ function aoc_11(map){
 	
 	function abs(){ return [...arguments].map(Math.abs); }
 	
-	function max(){ return Math.max.apply(0, arguments[0]); }
+	function max(){ return Math.max(...arguments[0]); }
 	
 	// part 1
 	console.log(max(abs(pos.x, pos.y, pos.z)));
