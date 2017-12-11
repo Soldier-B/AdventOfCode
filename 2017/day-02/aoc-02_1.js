@@ -1,6 +1,6 @@
 function aoc_2_1(spreadsheet){
 	return spreadsheet.reduce(function(checksum, row){
-		return Math.max.apply(0, row) - Math.min.apply(0, row) + checksum;
+		return Math.max(...row) - Math.min(...row) + checksum;
 	}, 0);
 }
 
