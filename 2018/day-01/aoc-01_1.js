@@ -1,10 +1,10 @@
-function AoC_1_1(){
+function aoc_1_1(){
 	return [].reduce.call(arguments, function(a, b){
 		return a + parseFloat(b);
 	}, 0);
 }
 
-AoC_1_1(
+aoc_1_1(
 '-14',
 '-9',
 '-14',

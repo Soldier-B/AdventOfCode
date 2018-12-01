@@ -1,4 +1,4 @@
-function AoC_1_2(){
+function aoc_1_2(){
 	var history = new Set(),
 		freq = 0,
 		i = 0;
@@ -15,7 +15,7 @@ function AoC_1_2(){
 	return freq;
 }
 
-AoC_1_2(
+aoc_1_2(
 '-14',
 '-9',
 '-14',
