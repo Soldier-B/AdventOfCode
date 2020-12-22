@@ -3,7 +3,7 @@ var data = parse_groups(get_data().split('\n')),
 	p2 = part2(data);
 
 console.log('part 1: %s', p1);
-console.log('part 2: %O', p2);
+console.log('part 2: %s', p2);
 
 function part1(groups) {
 	return groups.reduce((c, g) => {

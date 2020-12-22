@@ -3,7 +3,7 @@ var data = get_data().split('\n').map(seatId).sort((a, b) => a - b),
 	p2 = data.find((s, i, a) => a[++i] - s > 1) + 1;
 
 console.log('part 1: %s', p1);
-console.log('part 2: %O', p2);
+console.log('part 2: %s', p2);
 
 function seatId(seat) {
 	seat = seat
