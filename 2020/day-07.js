@@ -4,7 +4,7 @@ var data = get_data().split('\n').map(parse_bag),
 	p2 = part2(data);
 
 console.log('part 1: %s', p1);
-console.log('part 2: %s', p2); // 187, too low
+console.log('part 2: %s', p2);
 
 
 function part1(bags) {
