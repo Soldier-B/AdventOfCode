@@ -7,11 +7,28 @@ import (
 	"sync/atomic"
 )
 
-var found atomic.Int32
-var wg sync.WaitGroup
-
 func Part1() {
+	var found atomic.Int32
+	var wg sync.WaitGroup
 	puzzle := [][]rune{}
+
+	trace := func(puzzle [][]rune, x int, y int, dx int, dy int) {
+		wg.Add(1)
+		defer wg.Done()
+
+		xmas, l := []rune("XMAS"), 0
+
+		for l < 4 {
+			if y < 0 || y >= len(puzzle) || x < 0 || x >= len(puzzle[y]) || puzzle[y][x] != xmas[l] {
+				return
+			}
+			x += dx
+			y += dy
+			l++
+		}
+
+		found.Add(1)
+	}
 
 	helper.ReadFile("./input/day4.txt", func(row string) {
 		puzzle = append(puzzle, []rune(row))
@@ -20,9 +37,6 @@ func Part1() {
 	for y := range puzzle {
 		for x := range puzzle[y] {
 			if puzzle[y][x] == 'X' {
-
-				wg.Add(8)
-
 				go trace(puzzle, x, y, -1, -1)
 				go trace(puzzle, x, y, 0, -1)
 				go trace(puzzle, x, y, 1, -1)
@@ -39,21 +53,4 @@ func Part1() {
 	wg.Wait()
 
 	fmt.Println(found.Load())
-}
-
-func trace(puzzle [][]rune, x int, y int, dx int, dy int) {
-	defer wg.Done()
-
-	xmas, l := []rune("XMAS"), 0
-
-	for l < 4 {
-		if y < 0 || y >= len(puzzle) || x < 0 || x >= len(puzzle[y]) || puzzle[y][x] != xmas[l] {
-			return
-		}
-		x += dx
-		y += dy
-		l++
-	}
-
-	found.Add(1)
 }
